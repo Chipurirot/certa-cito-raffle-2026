@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Certa Cito Annual Sports Games 2026</title>
+  <style>
+    :root{
+      --navy:#010124;
+      --teal:#029dab;
+      --green:#012906;
+      --white:#ffffff;
+      --muted: rgba(255,255,255,.72);
+      --card: rgba(255,255,255,.08);
+      --card2: rgba(255,255,255,.06);
+      --stroke: rgba(255,255,255,.14);
+      --shadow: 0 18px 50px rgba(0,0,0,.35);
+      --radius: 18px;
+      --radius2: 22px;
+      --max: 1160px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+      color:var(--white);
+      background:
+        radial-gradient(1200px 900px at 25% 15%, rgba(2,157,171,.25), transparent 60%),
+        radial-gradient(900px 700px at 80% 20%, rgba(1,41,6,.22), transparent 60%),
+        radial-gradient(1000px 800px at 50% 90%, rgba(2,157,171,.14), transparent 55%),
+        linear-gradient(160deg, #010124 0%, #010124 40%, #012906 100%);
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    /* Watermark */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:
+        url("logo.png") center 120px / 420px no-repeat;
+      opacity:.07;
+      pointer-events:none;
+      filter: saturate(1.2) contrast(1.05);
+      transform: translateZ(0);
+    }
+
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:24px 18px 60px}
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+      padding:14px 16px;
+      border:1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.05));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      min-width:0;
+    }
+    .brand img{
+      width:44px; height:44px; object-fit:contain;
+      border-radius:12px;
+      padding:6px;
+      background: rgba(255,255,255,.08);
+      border:1px solid var(--stroke);
+    }
+    .brand .t{
+      display:flex; flex-direction:column; line-height:1.15; min-width:0;
+    }
+    .brand .t strong{
+      font-size:14px; letter-spacing:.08em;
+      text-transform:uppercase;
+      color: rgba(255,255,255,.92);
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .brand .t span{font-size:12px; color:var(--muted)}
+    .nav{
+      display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;
+    }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px;
+      border-radius: 999px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.06);
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      font-size:13px;
+    }
+    .chip:hover{transform: translateY(-1px); background: rgba(255,255,255,.10); border-color: rgba(2,157,171,.6)}
+    .chip b{color: rgba(255,255,255,.92)}
+    .hero{
+      margin-top:22px;
+      border-radius: var(--radius2);
+      border:1px solid var(--stroke);
+      background:
+        radial-gradient(900px 380px at 20% 10%, rgba(2,157,171,.25), transparent 65%),
+        radial-gradient(900px 380px at 80% 20%, rgba(1,41,6,.25), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      box-shadow: var(--shadow);
+      padding:30px 18px;
+      backdrop-filter: blur(10px);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::after{
+      content:"";
+      position:absolute;
+      width:520px; height:520px;
+      right:-240px; top:-260px;
+      background: conic-gradient(from 210deg, rgba(2,157,171,.55), rgba(1,41,6,.35), rgba(2,157,171,.25));
+      filter: blur(24px);
+      opacity:.35;
+    }
+    .heroGrid{
+      position:relative;
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    h1{
+      margin:0 0 10px;
+      font-size: clamp(22px, 3.2vw, 38px);
+      letter-spacing:.02em;
+      text-transform:uppercase;
+    }
+    .sub{
+      margin:0 0 18px;
+      color: rgba(255,255,255,.78);
+      font-size: 15px;
+      max-width: 60ch;
+    }
+    .ctaRow{
+      display:flex; flex-wrap:wrap; gap:12px;
+      margin-top: 12px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.07);
+      box-shadow: 0 10px 24px rgba(0,0,0,.22);
+      transition: transform .14s ease, background .14s ease, border-color .14s ease;
+      font-weight: 650;
+      font-size: 14px;
+      cursor:pointer;
+      user-select:none;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.11); border-color: rgba(2,157,171,.7)}
+    .btnPrimary{
+      background: linear-gradient(135deg, rgba(2,157,171,.9), rgba(1,41,6,.85));
+      border-color: rgba(2,157,171,.65);
+    }
+    .btnPrimary:hover{border-color: rgba(255,255,255,.25)}
+    .btnGhost{
+      background: rgba(1,1,36,.35);
+      border-color: rgba(255,255,255,.14);
+    }
+    .card{
+      border-radius: var(--radius2);
+      border:1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      box-shadow: var(--shadow);
+      padding:18px;
+      position:relative;
+      backdrop-filter: blur(10px);
+    }
+    .meta{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      margin-top: 12px;
+      color: rgba(255,255,255,.78);
+      font-size: 13px;
+    }
+    .pill{
+      display:flex; align-items:center; gap:10px;
+      padding:10px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+    }
+    .pill strong{color: rgba(255,255,255,.92)}
+    .grid{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    .mini{
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      padding:14px;
+      min-height: 110px;
+    }
+    .mini h3{margin:0 0 6px; font-size: 14px; letter-spacing:.02em}
+    .mini p{margin:0; color: rgba(255,255,255,.74); font-size: 13px; line-height:1.45}
+
+    .section{
+      margin-top:22px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+    }
+    .section h2{
+      margin:0 0 8px;
+      font-size: 18px;
+      letter-spacing:.02em;
+      text-transform:uppercase;
+    }
+    .tables{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:14px;
+    }
+
+    table{
+      width:100%;
+      border-collapse: collapse;
+      overflow:hidden;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.15);
+    }
+    th, td{
+      padding:10px 10px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      font-size: 13px;
+      text-align:left;
+    }
+    th{
+      background: linear-gradient(135deg, rgba(2,157,171,.35), rgba(1,41,6,.25));
+      color: rgba(255,255,255,.92);
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      font-size: 12px;
+    }
+    tr:last-child td{border-bottom:none}
+    .tag{
+      display:inline-flex;
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      font-size: 12px;
+      color: rgba(255,255,255,.85);
+      white-space:nowrap;
+    }
+
+    .footer{
+      margin-top:24px;
+      color: rgba(255,255,255,.68);
+      font-size: 13px;
+      text-align:center;
+    }
+
+    /* Responsive */
+    @media (max-width: 920px){
+      .heroGrid{grid-template-columns: 1fr}
+      .grid{grid-template-columns: 1fr}
+      .tables{grid-template-columns: 1fr}
+      body::before{background-size: 320px; background-position: center 140px;}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <div class="topbar">
+      <div class="brand">
+        <img src="logo.png" alt="Certa Cito logo">
+        <div class="t">
+          <strong>CERTA CITO ANNUAL SPORTS GAMES 2026</strong>
+          <span>Official Corps games hub • Fixtures • Ticket verification</span>
+        </div>
+      </div>
+      <div class="nav">
+        <a class="chip" href="#fixtures"><b>Fixtures</b></a>
+        <a class="chip" href="verify.html"><b>Verify Ticket</b></a>
+        <a class="chip" href="#sports"><b>Sports</b></a>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="heroGrid">
+        <div>
+          <h1>CERTA CITO ANNUAL SPORTS GAMES 2026</h1>
+          <p class="sub">
+            Siyakwamukela , Tigashire , Welcome to the Certa Cito 2026 annual sports games  portal where you can  View group-stage fixtures, explore sports disciplines,
+            and verify raffle tickets instantly via QR scan.
+          </p>
+
+          <div class="ctaRow">
+            <a class="btn btnPrimary" href="verify.html">Verify Raffle Ticket</a>
+            <a class="btn btnGhost" href="#fixtures">View Fixtures</a>
+            <a class="btn" href="#sports">Disciplines</a>
+          </div>
+
+          <div class="meta">
+            <div class="pill"><strong>Event:</strong> Annual Sports Games</div>
+            <div class="pill"><strong>Edition:</strong> 2026</div>
+            <div class="pill"><strong>Ticket:</strong> QR Validation</div>
+            <div class="pill"><strong>Live:</strong> Updates & fixtures</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 style="margin:0 0 8px;">Quick Actions</h2>
+          <p style="margin:0; color:rgba(255,255,255,.74); font-size:13px; line-height:1.45">
+            Use the verification page to confirm ticket validity and view event information.
+            The system is designed for fast scanning at gates and checkpoints.
+          </p>
+          <div class="ctaRow" style="margin-top:14px">
+            <a class="btn btnPrimary" href="verify.html">Open Verification</a>
+            <a class="btn" href="#fixtures">Group Tables</a>
+          </div>
+        </div>
+      </div>
+
+      <div id="sports" class="grid">
+        <div class="mini">
+          <h3>Team Sports</h3>
+          <p>Soccer, Volleyball, Netball, Basketball, Baseball/Softball, Cricket.</p>
+        </div>
+        <div class="mini">
+          <h3>Individual Sports</h3>
+          <p>Chess, Swimming, Darts and other competitive disciplines.</p>
+        </div>
+        <div class="mini">
+          <h3>Operations</h3>
+          <p>Professional ticket verification with QR scanning and instant confirmation.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="fixtures" class="section">
+      <div class="card">
+        <h2>Group Stage Fixtures</h2>
+        <p style="margin:0; color:rgba(255,255,255,.74); font-size:13px; line-height:1.45">
+          Example structure for Group A–D. You can replace teams, venues and times as you finalise schedules.
+        </p>
+
+        <div class="tables" style="margin-top:14px">
+          <div>
+            <div style="display:flex; align-items:center; justify-content:space-between; margin:0 0 8px;">
+              <strong>Soccer — Groups</strong>
+              <span class="tag">Group Stage</span>
+            </div>
+            <table>
+              <thead>
+                <tr><th>Group</th><th>Team 1</th><th>Team 2</th><th>Time</th><th>Venue</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>A</td><td>Signals A</td><td>Signals B</td><td>10:00</td><td>Main Field</td></tr>
+                <tr><td>B</td><td>Unit C</td><td>Unit D</td><td>12:00</td><td>Main Field</td></tr>
+                <tr><td>C</td><td>Unit E</td><td>Unit F</td><td>14:00</td><td>Field 2</td></tr>
+                <tr><td>D</td><td>Unit G</td><td>Unit H</td><td>16:00</td><td>Field 2</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div>
+            <div style="display:flex; align-items:center; justify-content:space-between; margin:0 0 8px;">
+              <strong>Volleyball — Groups</strong>
+              <span class="tag">Group Stage</span>
+            </div>
+            <table>
+              <thead>
+                <tr><th>Group</th><th>Team 1</th><th>Team 2</th><th>Time</th><th>Court</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>A</td><td>Volley A</td><td>Volley B</td><td>09:00</td><td>Court 1</td></tr>
+                <tr><td>B</td><td>Volley C</td><td>Volley D</td><td>11:00</td><td>Court 1</td></tr>
+                <tr><td>C</td><td>Volley E</td><td>Volley F</td><td>13:00</td><td>Court 2</td></tr>
+                <tr><td>D</td><td>Volley G</td><td>Volley H</td><td>15:00</td><td>Court 2</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div>
+            <div style="display:flex; align-items:center; justify-content:space-between; margin:0 0 8px;">
+              <strong>Netball — Groups</strong>
+              <span class="tag">Group Stage</span>
+            </div>
+            <table>
+              <thead>
+                <tr><th>Group</th><th>Team 1</th><th>Team 2</th><th>Time</th><th>Court</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>A</td><td>Net A</td><td>Net B</td><td>10:30</td><td>Court 3</td></tr>
+                <tr><td>B</td><td>Net C</td><td>Net D</td><td>12:30</td><td>Court 3</td></tr>
+                <tr><td>C</td><td>Net E</td><td>Net F</td><td>14:30</td><td>Court 4</td></tr>
+                <tr><td>D</td><td>Net G</td><td>Net H</td><td>16:30</td><td>Court 4</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div>
+            <div style="display:flex; align-items:center; justify-content:space-between; margin:0 0 8px;">
+              <strong>Chess / Darts / Swimming</strong>
+              <span class="tag">Heats & Rounds</span>
+            </div>
+            <table>
+              <thead>
+                <tr><th>Discipline</th><th>Round</th><th>Time</th><th>Venue</th><th>Note</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Chess</td><td>Round 1</td><td>09:00</td><td>Hall A</td><td>Swiss format</td></tr>
+                <tr><td>Darts</td><td>Qualifier</td><td>11:00</td><td>Hall B</td><td>Best of 5</td></tr>
+                <tr><td>Swimming</td><td>Heats</td><td>13:00</td><td>Pool</td><td>50m/100m</td></tr>
+                <tr><td>Basketball</td><td>Group</td><td>15:00</td><td>Court 5</td><td>4x10 mins</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      © 2026 CERTA CITO • Annual Sports Games • Official Event Hub
+    </div>
+
+  </div>
+</body>
+</html>
