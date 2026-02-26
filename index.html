@@ -3,637 +3,561 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Official portal for the Certa Cito Annual Sports Games 2026 – fixtures, news, ticket verification, and countdown." />
   <title>CERTA CITO ANNUAL SPORTS GAMES 2026</title>
-  <meta name="description" content="Certa Cito Annual Sports Games 2026 — fixtures, announcements, and ticket verification." />
-
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <!-- Optional Google Font for better typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
   <style>
     :root{
       --navy:#010124;
-      --teal:#029dab;
       --green:#012906;
-
+      --teal:#029dab;
+      --gold:#d4af37;
       --text:#ffffff;
-      --muted:rgba(255,255,255,.78);
-      --card:rgba(255,255,255,.08);
-      --card2:rgba(255,255,255,.06);
-      --stroke:rgba(255,255,255,.16);
-
-      --shadow: 0 18px 50px rgba(0,0,0,.38);
-      --radius: 18px;
-      --radius2: 24px;
-      --max: 1200px;
+      --muted:rgba(255,255,255,.75);
+      --stroke:rgba(255,255,255,.18);
+      --radius:18px;
     }
-
     *{box-sizing:border-box}
-    html,body{height:100%}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      font-family:'Inter', 'Segoe UI', system-ui, sans-serif;
+      font-size:16px;
+      line-height:1.6;
       color:var(--text);
-      background:
-        radial-gradient(1200px 700px at 15% 15%, rgba(2,157,171,.35), transparent 60%),
-        radial-gradient(1000px 700px at 85% 20%, rgba(1,41,6,.35), transparent 55%),
-        linear-gradient(135deg, var(--navy), rgba(2,157,171,.18), rgba(1,41,6,.22), var(--navy));
-      background-attachment: fixed;
-      overflow-x:hidden;
+      background:linear-gradient(-45deg,#010124,#012906,#010124,#012906);
+      background-size:400% 400%;
+      animation:bgMove 30s ease infinite;
+    }
+    @keyframes bgMove{
+      0%{background-position:0% 0%}
+      50%{background-position:100% 100%}
+      100%{background-position:0% 0%}
+    }
+    @media (prefers-reduced-motion: reduce) {
+      body { animation: none; }
     }
 
-    /* subtle grid texture */
-    body:before{
+    /* Watermark */
+    body::after{
       content:"";
       position:fixed; inset:0;
-      background-image: radial-gradient(rgba(255,255,255,.06) 1px, transparent 1px);
-      background-size: 22px 22px;
-      opacity:.25;
+      background:url("logo.png") center/500px no-repeat;
+      opacity:.05;
       pointer-events:none;
-      z-index:0;
+      z-index:-1;
     }
 
-    /* watermark logo */
-    body:after{
-      content:"";
-      position:fixed; inset:0;
-      background: url("logo.png") center/520px no-repeat;
-      opacity:.08;
-      filter: saturate(1.05) contrast(1.05);
-      pointer-events:none;
-      z-index:0;
-    }
-
-    a{color:inherit; text-decoration:none}
-    .wrap{position:relative; z-index:1}
-
-    /* Sticky header */
+    /* Header */
     header{
-      position:sticky;
-      top:0;
-      z-index:50;
-      backdrop-filter: blur(12px);
-      background: linear-gradient(180deg, rgba(1,1,36,.86), rgba(1,1,36,.58));
-      border-bottom:1px solid rgba(255,255,255,.10);
-    }
-    .header-inner{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:14px 18px;
+      position:sticky; top:0;
+      background:rgba(1,1,36,0.8);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--stroke);
+      padding:8px 20px;
       display:flex;
       align-items:center;
-      gap:14px;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
+      flex-wrap:wrap;
       gap:12px;
-      min-width: 260px;
+      z-index:10;
     }
-    .brand img{
-      width:46px; height:46px;
-      object-fit:contain;
-      filter: drop-shadow(0 10px 25px rgba(0,0,0,.45));
+    header img{
+      width:48px;
+      height:auto;
+      margin-right:8px;
     }
-    .brand-title{
-      line-height:1.05;
-      font-weight:900;
-      letter-spacing:.5px;
+    header h1{
+      font-size:1rem;
       text-transform:uppercase;
-      font-size:14px;
+      letter-spacing:1px;
+      margin:0;
+      flex:1;
     }
-    .brand-sub{
-      display:block;
-      margin-top:4px;
-      font-size:12px;
-      color:var(--muted);
-      font-weight:700;
-      letter-spacing:.2px;
-      text-transform:none;
-    }
-
     nav{
-      margin-left:auto;
       display:flex;
-      align-items:center;
       gap:10px;
       flex-wrap:wrap;
-      justify-content:flex-end;
+    }
+    nav a{
+      padding:8px 16px;
+      border-radius:50px;
+      background:transparent;
+      border:1px solid var(--teal);
+      font-weight:700;
+      font-size:0.85rem;
+      text-decoration:none;
+      color:white;
+      transition:all 0.2s;
+    }
+    nav a:hover{
+      background:var(--teal);
+      color:var(--navy);
+      border-color:var(--gold);
     }
 
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.16);
-      background: rgba(255,255,255,.06);
-      box-shadow: 0 10px 28px rgba(0,0,0,.25);
-      transition: transform .15s ease, background .15s ease, border-color .15s ease;
-      font-weight:800;
-      font-size:13px;
-      color:var(--text);
-      white-space:nowrap;
-    }
-    .btn:hover{
-      transform: translateY(-1px);
-      background: rgba(255,255,255,.10);
-      border-color: rgba(255,255,255,.22);
-    }
-    .btn.primary{
-      border:none;
-      background: linear-gradient(135deg, rgba(2,157,171,.98), rgba(1,41,6,.95));
-    }
-    .btn.primary:hover{
-      background: linear-gradient(135deg, rgba(2,157,171,1), rgba(1,41,6,1));
-    }
-
+    /* Main */
     main{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:24px 18px 60px;
+      max-width:1300px;
+      margin:auto;
+      padding:30px 20px;
     }
 
+    /* Hero */
     .hero{
       display:grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap:16px;
-      align-items:stretch;
-      margin-top:18px;
+      grid-template-columns:2fr 1fr;
+      gap:20px;
+      margin-bottom:40px;
     }
     .card{
+      padding:30px 25px;
+      border-radius:var(--radius);
+      background:linear-gradient(160deg,rgba(2,157,171,.2),rgba(1,41,6,.3));
       border:1px solid var(--stroke);
-      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
-      border-radius: var(--radius2);
-      box-shadow: var(--shadow);
-      overflow:hidden;
+      backdrop-filter:blur(4px);
     }
-    .card-pad{ padding:18px; }
-
-    .hero h1{
-      margin:0 0 8px;
-      font-size:32px;
-      letter-spacing:.2px;
-      line-height:1.1;
-      text-transform:uppercase;
+    .hero .card:first-child{
+      background:linear-gradient(145deg, rgba(2,157,171,0.3), rgba(1,41,6,0.5));
+      box-shadow:0 20px 30px -10px rgba(0,0,0,0.5);
+      text-align:center;
     }
-    .hero p{
-      margin:0;
-      color:var(--muted);
-      font-weight:650;
-      line-height:1.45;
-    }
-
-    .hero-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:14px;
-    }
-
-    .stats{
-      display:grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-      gap:12px;
-    }
-    .stat{
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      border-radius: 16px;
-      padding:12px;
-    }
-    .stat b{ display:block; font-size:20px; letter-spacing:.2px;}
-    .stat span{ display:block; margin-top:4px; color:var(--muted); font-weight:700; font-size:12px;}
-
-    .section{ margin-top:22px; }
-    .section h2{
-      margin:0 0 10px;
-      font-size:18px;
-      text-transform:uppercase;
-      letter-spacing:.6px;
-    }
-    .section p{
-      margin:0 0 12px;
-      color:var(--muted);
-      font-weight:650;
-      line-height:1.45;
-    }
-
-    /* Fixtures */
-    .fixtures-shell{
-      border:1px solid var(--stroke);
-      background: rgba(255,255,255,.05);
-      border-radius: var(--radius2);
-      overflow:hidden;
-    }
-    .fixtures-head{
-      padding:14px 16px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      border-bottom:1px solid rgba(255,255,255,.12);
-      background: linear-gradient(90deg, rgba(2,157,171,.18), rgba(1,41,6,.14));
-    }
-    .fixtures-head .note{
-      color:var(--muted);
+    .hero .card:first-child h2{
+      font-size:2rem;
+      margin:0 0 1rem;
+      color:var(--gold);
       font-weight:800;
-      font-size:12px;
+    }
+    .countdown{
+      display:flex;
+      justify-content:center;
+      gap:1.5rem;
+      margin:1.5rem 0 0.5rem;
+      flex-wrap:wrap;
+    }
+    .count{
+      background:rgba(0,0,0,0.4);
+      border-radius:12px;
+      padding:0.75rem 1rem;
+      min-width:80px;
+      border:1px solid var(--stroke);
+    }
+    .count b{
+      display:block;
+      font-size:2.5rem;
+      line-height:1;
+      color:var(--gold);
+    }
+    .gold{color:var(--gold);font-weight:900}
+
+    /* Sections */
+    .section{
+      margin-top:60px;
+    }
+    .section h2{
+      font-size:2rem;
+      letter-spacing:-0.02em;
+      text-transform:uppercase;
+      border-left:5px solid var(--teal);
+      padding-left:10px;
+      margin:0 0 1.5rem;
     }
 
-    details{ border-top:1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.03); }
+    /* Fixtures – details & tables */
+    details{
+      margin-top:15px;
+      border-radius:var(--radius);
+      overflow:hidden;
+      border:1px solid var(--stroke);
+      background:rgba(0,0,0,0.2);
+    }
     summary{
-      cursor:pointer;
       list-style:none;
-      padding:14px 16px;
       display:flex;
       align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:.5px;
+      gap:8px;
+      font-weight:700;
+      font-size:1.2rem;
+      padding:16px 20px;
+      background:linear-gradient(90deg, rgba(1,1,36,0.9), rgba(1,41,6,0.9));
+      border-radius:var(--radius) var(--radius) 0 0;
+      cursor:pointer;
     }
     summary::-webkit-details-marker{display:none}
-    .badge{
-      font-size:12px;
-      padding:4px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.16);
-      color:var(--muted);
-      font-weight:900;
+    summary::before{
+      content:"▶";
+      font-size:0.9rem;
+      transition:transform 0.2s;
+      color:var(--teal);
+    }
+    details[open] summary::before{
+      transform:rotate(90deg);
     }
     .groups{
-      padding:0 16px 16px;
       display:grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap:12px;
+      grid-template-columns:repeat(2,1fr);
+      gap:15px;
+      padding:15px;
     }
     .group{
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.05);
-      border-radius: 18px;
-      overflow:hidden;
-    }
-    .group .ghead{
-      padding:10px 12px;
-      border-bottom:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      font-weight:900;
-      letter-spacing:.4px;
-      text-transform:uppercase;
-      font-size:12px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:8px;
+      background:rgba(1,41,6,0.25);
+      backdrop-filter:blur(2px);
+      border-radius:var(--radius);
+      padding:15px;
+      border:1px solid var(--stroke);
     }
     .group table{
       width:100%;
       border-collapse:collapse;
-      font-size:13px;
+      font-size:0.95rem;
     }
-    .group th, .group td{
-      padding:10px 12px;
-      border-bottom:1px solid rgba(255,255,255,.10);
-      vertical-align:top;
+    .group td{
+      padding:12px 8px;
+      border-bottom:1px solid rgba(255,255,255,.1);
     }
-    .group th{
-      color:var(--muted);
-      text-transform:uppercase;
-      letter-spacing:.35px;
-      font-size:11px;
-      text-align:left;
-      font-weight:900;
-      background: rgba(0,0,0,.10);
+    .group tr:last-child td{
+      border-bottom:none;
     }
-    .vs{ font-weight:950; letter-spacing:.2px; }
-    .muted{ color:var(--muted); }
+    .vs{
+      font-weight:700;
+    }
+    .match-time{
+      color:var(--gold);
+      font-size:0.85rem;
+      background:rgba(0,0,0,0.3);
+      padding:4px 10px;
+      border-radius:40px;
+      display:inline-block;
+      white-space:nowrap;
+    }
+    /* Add a second column for time in each table */
+    .group table td:last-child{
+      text-align:right;
+      width:80px;
+    }
 
-    /* News */
+    /* News grid */
     .news-list{
       display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap:14px;
+      grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+      gap:24px;
     }
     .post{
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      border-radius: 18px;
-      padding:14px;
+      background:linear-gradient(160deg, rgba(2,157,171,0.15), rgba(1,41,6,0.25));
+      border:1px solid var(--stroke);
+      border-radius:var(--radius);
+      padding:20px;
+      transition:transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .post h3{ margin:0 0 8px; font-size:14px; text-transform:uppercase; letter-spacing:.3px;}
-    .post p{ margin:0; color:var(--muted); font-weight:650; line-height:1.45; font-size:13px;}
-    .post .meta{ margin-top:10px; font-size:12px; color:rgba(255,255,255,.70); font-weight:900;}
+    .post:hover{
+      transform:translateY(-5px);
+      box-shadow:0 15px 30px -10px black;
+    }
+    .post h3{
+      margin:0 0 5px;
+      font-size:1.3rem;
+    }
+    .post .date{
+      color:var(--gold);
+      font-size:0.8rem;
+      text-transform:uppercase;
+      letter-spacing:0.5px;
+      display:block;
+      margin-bottom:10px;
+    }
+    .post p{
+      margin:10px 0 0;
+      opacity:0.9;
+      line-height:1.5;
+    }
+    .post a{
+      color:var(--teal);
+      text-decoration:none;
+      font-weight:600;
+      display:inline-block;
+      margin-top:12px;
+    }
+    .post a:hover{
+      color:var(--gold);
+    }
 
-    footer{
-      margin-top:26px;
-      padding:18px;
-      color:rgba(255,255,255,.70);
-      font-weight:800;
+    /* Sponsors section */
+    .sponsor-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
+      gap:20px;
+      margin-top:20px;
+    }
+    .sponsor-item{
+      background:rgba(255,255,255,0.05);
+      border:1px solid var(--stroke);
+      border-radius:var(--radius);
+      padding:20px;
       text-align:center;
+      font-weight:600;
+      backdrop-filter:blur(2px);
+      transition:all 0.2s;
+    }
+    .sponsor-item:hover{
+      background:rgba(2,157,171,0.2);
+      border-color:var(--teal);
     }
 
-    @media (max-width: 980px){
-      .hero{ grid-template-columns: 1fr; }
-      .groups{ grid-template-columns: 1fr; }
-      .news-list{ grid-template-columns: 1fr; }
-      .brand{ min-width:unset; }
+    /* Footer */
+    footer{
+      margin-top:60px;
+      padding:30px 20px;
+      background:rgba(0,0,0,0.3);
+      border-top:1px solid var(--stroke);
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      font-size:0.9rem;
+      opacity:0.9;
+    }
+    .footer-links a{
+      color:var(--teal);
+      text-decoration:none;
+      margin:0 10px;
+    }
+    .footer-links a:hover{
+      color:var(--gold);
+    }
+
+    /* Responsive */
+    @media(max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .groups{grid-template-columns:1fr}
+    }
+    @media(max-width:600px){
+      header{
+        flex-direction:column;
+        text-align:center;
+      }
+      header h1{
+        font-size:0.9rem;
+        margin:5px 0;
+      }
+      nav{
+        justify-content:center;
+        width:100%;
+      }
+      .count b{font-size:1.8rem}
+      .hero .card:first-child h2{font-size:1.5rem}
+      .section h2{font-size:1.6rem}
+      footer{
+        flex-direction:column;
+        text-align:center;
+      }
     }
   </style>
 </head>
-
 <body>
-  <div class="wrap">
-    <header>
-      <div class="header-inner">
-        <div class="brand">
-          <img src="logo.png" alt="Certa Cito Logo" />
-          <div>
-            <div class="brand-title">Certa Cito Annual Sports Games 2026</div>
-            <span class="brand-sub">Fixtures • News & Announcements • Ticket Verification</span>
-          </div>
-        </div>
 
-        <nav>
-          <a class="btn" href="#fixtures">Fixtures</a>
-          <a class="btn" href="#news">News & Announcements</a>
-          <a class="btn primary" href="verify.html">Verify Ticket</a>
-        </nav>
-      </div>
-    </header>
+<header>
+  <img src="logo.png" alt="Certa Cito logo">
+  <h1>Certa Cito Annual Sports Games 2026</h1>
+  <nav>
+    <a href="#fixtures">Fixtures</a>
+    <a href="#news">News</a>
+    <a href="verify.html">Verify Ticket</a>
+  </nav>
+</header>
 
-    <main>
-      <section class="hero">
-        <div class="card">
-          <div class="card-pad">
-            <h1>Certa Cito Annual Sports Games 2026</h1>
-            <p>
-              Official hub for match fixtures, announcements, and raffle ticket verification.
-              Teams are placeholders as <b>“— Signals Squadron”</b> so you can replace later with exact squadron names.
-            </p>
+<main>
 
-            <div class="hero-actions">
-              <a class="btn primary" href="verify.html">Verify Ticket Now</a>
-              <a class="btn" href="#fixtures">View Fixtures</a>
-              <a class="btn" href="#news">Latest Announcements</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-pad">
-            <div class="stats">
-              <div class="stat"><b>2500</b><span>Tickets issued (database)</span></div>
-              <div class="stat"><b>Groups A–D</b><span>Group stage format</span></div>
-              <div class="stat"><b>Multi-Sport</b><span>Soccer, Volleyball, Chess, etc.</span></div>
-              <div class="stat"><b>Updates</b><span>Announcements & changes</span></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="fixtures" class="section">
-        <h2>Fixtures — Group Stages</h2>
-        <p class="muted">Each fixture uses “vs” and placeholder teams as “— Signals Squadron”. Replace later.</p>
-
-        <div class="fixtures-shell">
-          <div class="fixtures-head">
-            <div><b>Disciplines</b> (expand each)</div>
-            <div class="note">Example: Team — Signals Squadron <span class="vs">vs</span> Team — Signals Squadron</div>
-          </div>
-
-          <details open>
-            <summary>Soccer <span class="badge">Groups A–D</span></summary>
-            <div class="groups">
-              <div class="group">
-                <div class="ghead">Group A <span class="badge">Round-robin</span></div>
-                <table>
-                  <thead><tr><th>Fixture</th><th>Notes</th></tr></thead>
-                  <tbody>
-                    <tr><td class="vs">Team 1 — Signals Squadron vs Team 2 — Signals Squadron</td><td class="muted">TBD • Venue</td></tr>
-                    <tr><td class="vs">Team 3 — Signals Squadron vs Team 4 — Signals Squadron</td><td class="muted">TBD • Venue</td></tr>
-                    <tr><td class="vs">Team 1 — Signals Squadron vs Team 3 — Signals Squadron</td><td class="muted">TBD • Venue</td></tr>
-                    <tr><td class="vs">Team 2 — Signals Squadron vs Team 4 — Signals Squadron</td><td class="muted">TBD • Venue</td></tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <div class="group">
-                <div class="ghead">Group B <span class="badge">Round-robin</span></div>
-                <table>
-                  <thead><tr><th>Fixture</th><th>Notes</th></tr></thead>
-                  <tbody>
-                    <tr><td class="vs">Team 5 — Signals Squadron vs Team 6 — Signals Squadron</td><td class="muted">TBD • Venue</td></tr>
-                    <tr><td class="vs">Team 7 — Signals Squadron vs Team 8 — Signals Squadron</td><td class="muted">TBD • Venue</td></tr>
-                    <tr><td class="vs">Team 5 — Signals Squadron vs Team 7 — Signals Squadron</td><td class="muted">TBD • Venue</td></tr>
-                    <tr><td class="vs">Team 6 — Signals Squadron vs Team 8 — Signals Squadron</td><td class="muted">TBD • Venue</td></tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <div class="group">
-                <div class="ghead">Group C <span class="badge">Round-robin</span></div>
-                <table>
-                  <thead><tr><th>Fixture</th><th>Notes</th></tr></thead>
-                  <tbody>
-                    <tr><td class="vs">Team 9 — Signals Squadron vs Team 10 — Signals Squadron</td><td class="muted">TBD • Venue</td></tr>
-                    <tr><td class="vs">Team 11 — Signals Squadron vs Team 12 — Signals Squadron</td><td class="muted">TBD • Venue</td></tr>
-                    <tr><td class="vs">Team 9 — Signals Squadron vs Team 11 — Signals Squadron</td><td class="muted">TBD • Venue</td></tr>
-                    <tr><td class="vs">Team 10 — Signals Squadron vs Team 12 — Signals Squadron</td><td class="muted">TBD • Venue</td></tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <div class="group">
-                <div class="ghead">Group D <span class="badge">Round-robin</span></div>
-                <table>
-                  <thead><tr><th>Fixture</th><th>Notes</th></tr></thead>
-                  <tbody>
-                    <tr><td class="vs">Team 13 — Signals Squadron vs Team 14 — Signals Squadron</td><td class="muted">TBD • Venue</td></tr>
-                    <tr><td class="vs">Team 15 — Signals Squadron vs Team 16 — Signals Squadron</td><td class="muted">TBD • Venue</td></tr>
-                    <tr><td class="vs">Team 13 — Signals Squadron vs Team 15 — Signals Squadron</td><td class="muted">TBD • Venue</td></tr>
-                    <tr><td class="vs">Team 14 — Signals Squadron vs Team 16 — Signals Squadron</td><td class="muted">TBD • Venue</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </details>
-
-          <details><summary>Volleyball <span class="badge">Groups A–D</span></summary>
-            <div class="groups">
-              <div class="group"><div class="ghead">Group A</div><table><tbody>
-                <tr><td class="vs">Team A1 — Signals Squadron vs Team A2 — Signals Squadron</td><td class="muted">TBD</td></tr>
-                <tr><td class="vs">Team A3 — Signals Squadron vs Team A4 — Signals Squadron</td><td class="muted">TBD</td></tr>
-              </tbody></table></div>
-              <div class="group"><div class="ghead">Group B</div><table><tbody>
-                <tr><td class="vs">Team B1 — Signals Squadron vs Team B2 — Signals Squadron</td><td class="muted">TBD</td></tr>
-                <tr><td class="vs">Team B3 — Signals Squadron vs Team B4 — Signals Squadron</td><td class="muted">TBD</td></tr>
-              </tbody></table></div>
-              <div class="group"><div class="ghead">Group C</div><table><tbody>
-                <tr><td class="vs">Team C1 — Signals Squadron vs Team C2 — Signals Squadron</td><td class="muted">TBD</td></tr>
-                <tr><td class="vs">Team C3 — Signals Squadron vs Team C4 — Signals Squadron</td><td class="muted">TBD</td></tr>
-              </tbody></table></div>
-              <div class="group"><div class="ghead">Group D</div><table><tbody>
-                <tr><td class="vs">Team D1 — Signals Squadron vs Team D2 — Signals Squadron</td><td class="muted">TBD</td></tr>
-                <tr><td class="vs">Team D3 — Signals Squadron vs Team D4 — Signals Squadron</td><td class="muted">TBD</td></tr>
-              </tbody></table></div>
-            </div>
-          </details>
-
-          <details><summary>Chess <span class="badge">Groups A–D</span></summary>
-            <div class="groups">
-              <div class="group"><div class="ghead">Group A</div><table><tbody>
-                <tr><td class="vs">Player/Team A1 — Signals Squadron vs Player/Team A2 — Signals Squadron</td><td class="muted">TBD</td></tr>
-              </tbody></table></div>
-              <div class="group"><div class="ghead">Group B</div><table><tbody>
-                <tr><td class="vs">Player/Team B1 — Signals Squadron vs Player/Team B2 — Signals Squadron</td><td class="muted">TBD</td></tr>
-              </tbody></table></div>
-              <div class="group"><div class="ghead">Group C</div><table><tbody>
-                <tr><td class="vs">Player/Team C1 — Signals Squadron vs Player/Team C2 — Signals Squadron</td><td class="muted">TBD</td></tr>
-              </tbody></table></div>
-              <div class="group"><div class="ghead">Group D</div><table><tbody>
-                <tr><td class="vs">Player/Team D1 — Signals Squadron vs Player/Team D2 — Signals Squadron</td><td class="muted">TBD</td></tr>
-              </tbody></table></div>
-            </div>
-          </details>
-
-          <details><summary>Netball <span class="badge">Groups A–D</span></summary>
-            <div class="groups">
-              <div class="group"><div class="ghead">Group A</div><table><tbody>
-                <tr><td class="vs">Team A1 — Signals Squadron vs Team A2 — Signals Squadron</td><td class="muted">TBD</td></tr>
-              </tbody></table></div>
-              <div class="group"><div class="ghead">Group B</div><table><tbody>
-                <tr><td class="vs">Team B1 — Signals Squadron vs Team B2 — Signals Squadron</td><td class="muted">TBD</td></tr>
-              </tbody></table></div>
-              <div class="group"><div class="ghead">Group C</div><table><tbody>
-                <tr><td class="vs">Team C1 — Signals Squadron vs Team C2 — Signals Squadron</td><td class="muted">TBD</td></tr>
-              </tbody></table></div>
-              <div class="group"><div class="ghead">Group D</div><table><tbody>
-                <tr><td class="vs">Team D1 — Signals Squadron vs Team D2 — Signals Squadron</td><td class="muted">TBD</td></tr>
-              </tbody></table></div>
-            </div>
-          </details>
-
-          <details><summary>Basketball <span class="badge">Groups A–D</span></summary>
-            <div class="groups">
-              <div class="group"><div class="ghead">Group A</div><table><tbody>
-                <tr><td class="vs">Team A1 — Signals Squadron vs Team A2 — Signals Squadron</td><td class="muted">TBD</td></tr>
-              </tbody></table></div>
-              <div class="group"><div class="ghead">Group B</div><table><tbody>
-                <tr><td class="vs">Team B1 — Signals Squadron vs Team B2 — Signals Squadron</td><td class="muted">TBD</td></tr>
-              </tbody></table></div>
-              <div class="group"><div class="ghead">Group C</div><table><tbody>
-                <tr><td class="vs">Team C1 — Signals Squadron vs Team C2 — Signals Squadron</td><td class="muted">TBD</td></tr>
-              </tbody></table></div>
-              <div class="group"><div class="ghead">Group D</div><table><tbody>
-                <tr><td class="vs">Team D1 — Signals Squadron vs Team D2 — Signals Squadron</td><td class="muted">TBD</td></tr>
-              </tbody></table></div>
-            </div>
-          </details>
-
-          <details><summary>Cricket <span class="badge">Groups A–D</span></summary>
-            <div class="groups">
-              <div class="group"><div class="ghead">Group A</div><table><tbody>
-                <tr><td class="vs">Team A1 — Signals Squadron vs Team A2 — Signals Squadron</td><td class="muted">TBD</td></tr>
-              </tbody></table></div>
-              <div class="group"><div class="ghead">Group B</div><table><tbody>
-                <tr><td class="vs">Team B1 — Signals Squadron vs Team B2 — Signals Squadron</td><td class="muted">TBD</td></tr>
-              </tbody></table></div>
-              <div class="group"><div class="ghead">Group C</div><table><tbody>
-                <tr><td class="vs">Team C1 — Signals Squadron vs Team C2 — Signals Squadron</td><td class="muted">TBD</td></tr>
-              </tbody></table></div>
-              <div class="group"><div class="ghead">Group D</div><table><tbody>
-                <tr><td class="vs">Team D1 — Signals Squadron vs Team D2 — Signals Squadron</td><td class="muted">TBD</td></tr>
-              </tbody></table></div>
-            </div>
-          </details>
-
-          <details><summary>Swimming <span class="badge">Heats</span></summary>
-            <div class="groups">
-              <div class="group" style="grid-column:1/-1;">
-                <div class="ghead">Heats & Finals <span class="badge">Events</span></div>
-                <table>
-                  <thead><tr><th>Event</th><th>Notes</th></tr></thead>
-                  <tbody>
-                    <tr><td class="vs">50m Freestyle — Signals Squadron vs — Signals Squadron</td><td class="muted">Heats • TBD</td></tr>
-                    <tr><td class="vs">100m Freestyle — Signals Squadron vs — Signals Squadron</td><td class="muted">Heats • TBD</td></tr>
-                    <tr><td class="vs">50m Backstroke — Signals Squadron vs — Signals Squadron</td><td class="muted">Heats • TBD</td></tr>
-                    <tr><td class="vs">Relay — Signals Squadron vs — Signals Squadron</td><td class="muted">Finals • TBD</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </details>
-
-          <details><summary>Darts <span class="badge">Groups A–D</span></summary>
-            <div class="groups">
-              <div class="group"><div class="ghead">Group A</div><table><tbody>
-                <tr><td class="vs">Team A1 — Signals Squadron vs Team A2 — Signals Squadron</td><td class="muted">TBD</td></tr>
-              </tbody></table></div>
-              <div class="group"><div class="ghead">Group B</div><table><tbody>
-                <tr><td class="vs">Team B1 — Signals Squadron vs Team B2 — Signals Squadron</td><td class="muted">TBD</td></tr>
-              </tbody></table></div>
-              <div class="group"><div class="ghead">Group C</div><table><tbody>
-                <tr><td class="vs">Team C1 — Signals Squadron vs Team C2 — Signals Squadron</td><td class="muted">TBD</td></tr>
-              </tbody></table></div>
-              <div class="group"><div class="ghead">Group D</div><table><tbody>
-                <tr><td class="vs">Team D1 — Signals Squadron vs Team D2 — Signals Squadron</td><td class="muted">TBD</td></tr>
-              </tbody></table></div>
-            </div>
-          </details>
-
-          <details><summary>Baseball <span class="badge">Groups A–D</span></summary>
-            <div class="groups">
-              <div class="group"><div class="ghead">Group A</div><table><tbody>
-                <tr><td class="vs">Team A1 — Signals Squadron vs Team A2 — Signals Squadron</td><td class="muted">TBD</td></tr>
-              </tbody></table></div>
-              <div class="group"><div class="ghead">Group B</div><table><tbody>
-                <tr><td class="vs">Team B1 — Signals Squadron vs Team B2 — Signals Squadron</td><td class="muted">TBD</td></tr>
-              </tbody></table></div>
-              <div class="group"><div class="ghead">Group C</div><table><tbody>
-                <tr><td class="vs">Team C1 — Signals Squadron vs Team C2 — Signals Squadron</td><td class="muted">TBD</td></tr>
-              </tbody></table></div>
-              <div class="group"><div class="ghead">Group D</div><table><tbody>
-                <tr><td class="vs">Team D1 — Signals Squadron vs Team D2 — Signals Squadron</td><td class="muted">TBD</td></tr>
-              </tbody></table></div>
-            </div>
-          </details>
-        </div>
-      </section>
-
-      <section id="news" class="section">
-        <h2>News & Announcements</h2>
-        <p class="muted">Use these placeholders for official updates (fixture changes, venues, results, draw info, etc.).</p>
-
-        <div class="news-list">
-          <div class="post">
-            <h3>Announcement #1 — Opening Ceremony</h3>
-            <p>Add time, venue, dress code, parade order, and key instructions here.</p>
-            <div class="meta">Date: TBD • Posted by: Organising Committee</div>
-          </div>
-
-          <div class="post">
-            <h3>Announcement #2 — Fixture Updates</h3>
-            <p>Post last-minute changes due to weather, venues, or logistics here.</p>
-            <div class="meta">Date: TBD • Posted by: Fixtures Desk</div>
-          </div>
-
-          <div class="post">
-            <h3>Announcement #3 — Ticket & Prizes</h3>
-            <p>Post raffle rules, prize list, and official draw time/date here.</p>
-            <div class="meta">Date: TBD • Posted by: Raffle Desk</div>
-          </div>
-
-          <div class="post">
-            <h3>Announcement #4 — Results</h3>
-            <p>Post group standings, knockout brackets, and final results links here.</p>
-            <div class="meta">Date: TBD • Posted by: Results Desk</div>
-          </div>
-        </div>
-      </section>
-
-      <footer>
-        © 2026 • CERTA CITO ANNUAL SPORTS GAMES • Corps of Signals Colours: #010124 • #029dab • #012906
-      </footer>
-    </main>
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="card">
+    <h2>OFFICIAL TOURNAMENT PORTAL</h2>
+    <div class="countdown" id="countdown">
+      <!-- filled by js -->
+    </div>
   </div>
+  <div class="card">
+    <h3 class="gold">🎉 Opening Ceremony</h3>
+    <p>Full parade, discipline showcase and official address.<br><strong>June 1, 2026 · 09:00</strong></p>
+  </div>
+</section>
+
+<!-- FIXTURES (all disciplines preserved) -->
+<section id="fixtures" class="section">
+  <h2>Fixtures — Group Stages</h2>
+
+  <!-- Soccer -->
+  <details open><summary>⚽ Soccer</summary><div class="groups">
+    <div class="group"><table>
+      <tr><td class="vs">-- SIGNALS SQUADRON VS -- SIGNALS SQUADRON</td><td><span class="match-time">10:00</span></td></tr>
+      <tr><td class="vs">-- SIGNALS SQUADRON VS -- SIGNALS SQUADRON</td><td><span class="match-time">12:00</span></td></tr>
+      <tr><td class="vs">-- SIGNALS SQUADRON VS -- SIGNALS SQUADRON</td><td><span class="match-time">14:00</span></td></tr>
+      <tr><td class="vs">-- SIGNALS SQUADRON VS -- SIGNALS SQUADRON</td><td><span class="match-time">16:00</span></td></tr>
+    </table></div>
+  </div></details>
+
+  <!-- Volleyball -->
+  <details><summary>🏐 Volleyball</summary><div class="groups">
+    <div class="group"><table>
+      <tr><td class="vs">-- SIGNALS SQUADRON VS -- SIGNALS SQUADRON</td><td><span class="match-time">09:00</span></td></tr>
+      <tr><td class="vs">-- SIGNALS SQUADRON VS -- SIGNALS SQUADRON</td><td><span class="match-time">11:00</span></td></tr>
+    </table></div>
+  </div></details>
+
+  <!-- Chess -->
+  <details><summary>♟️ Chess</summary><div class="groups">
+    <div class="group"><table>
+      <tr><td class="vs">-- SIGNALS SQUADRON VS -- SIGNALS SQUADRON</td><td><span class="match-time">10:30</span></td></tr>
+    </table></div>
+  </div></details>
+
+  <!-- Netball -->
+  <details><summary>🏐 Netball</summary><div class="groups">
+    <div class="group"><table>
+      <tr><td class="vs">-- SIGNALS SQUADRON VS -- SIGNALS SQUADRON</td><td><span class="match-time">13:00</span></td></tr>
+    </table></div>
+  </div></details>
+
+  <!-- Basketball -->
+  <details><summary>🏀 Basketball</summary><div class="groups">
+    <div class="group"><table>
+      <tr><td class="vs">-- SIGNALS SQUADRON VS -- SIGNALS SQUADRON</td><td><span class="match-time">15:30</span></td></tr>
+    </table></div>
+  </div></details>
+
+  <!-- Cricket -->
+  <details><summary>🏏 Cricket</summary><div class="groups">
+    <div class="group"><table>
+      <tr><td class="vs">-- SIGNALS SQUADRON VS -- SIGNALS SQUADRON</td><td><span class="match-time">09:30</span></td></tr>
+    </table></div>
+  </div></details>
+
+  <!-- Swimming -->
+  <details><summary>🏊 Swimming</summary><div class="groups">
+    <div class="group"><table>
+      <tr><td class="vs">-- SIGNALS SQUADRON VS -- SIGNALS SQUADRON</td><td><span class="match-time">10:00</span></td></tr>
+      <tr><td class="vs">-- SIGNALS SQUADRON VS -- SIGNALS SQUADRON</td><td><span class="match-time">11:30</span></td></tr>
+    </table></div>
+  </div></details>
+
+  <!-- Darts -->
+  <details><summary>🎯 Darts</summary><div class="groups">
+    <div class="group"><table>
+      <tr><td class="vs">-- SIGNALS SQUADRON VS -- SIGNALS SQUADRON</td><td><span class="match-time">14:00</span></td></tr>
+    </table></div>
+  </div></details>
+
+  <!-- Baseball -->
+  <details><summary>⚾ Baseball</summary><div class="groups">
+    <div class="group"><table>
+      <tr><td class="vs">-- SIGNALS SQUADRON VS -- SIGNALS SQUADRON</td><td><span class="match-time">12:30</span></td></tr>
+    </table></div>
+  </div></details>
+</section>
+
+<!-- NEWS SECTION -->
+<section id="news" class="section">
+  <h2>News & Announcements</h2>
+  <div class="news-list">
+    <div class="post">
+      <span class="date">March 10, 2026</span>
+      <h3 class="gold">🎉 Opening Ceremony Lineup Revealed</h3>
+      <p>The parade will begin at 09:00 with performances from the Signals Band and a flypast.</p>
+      <a href="#">Read more →</a>
+    </div>
+    <div class="post">
+      <span class="date">March 5, 2026</span>
+      <h3>📅 Fixture Updates</h3>
+      <p>Minor time changes for Basketball and Cricket. Check the fixtures tab for details.</p>
+      <a href="#">Read more →</a>
+    </div>
+    <div class="post">
+      <span class="date">February 28, 2026</span>
+      <h3>🎟️ Ticket & Prizes</h3>
+      <p>Early bird tickets now on sale. Grand prize draw includes sports gear and trophies.</p>
+      <a href="#">Read more →</a>
+    </div>
+    <div class="post">
+      <span class="date">February 20, 2026</span>
+      <h3>🏆 Results</h3>
+      <p>Qualifying rounds completed – view the final group standings.</p>
+      <a href="#">Read more →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SPONSORS SECTION -->
+<section class="section sponsors">
+  <h2>Sponsored By</h2>
+  <div class="sponsor-grid">
+    <div class="sponsor-item">🏢 Sponsor 1</div>
+    <div class="sponsor-item">🏢 Sponsor 2</div>
+    <div class="sponsor-item">🏢 Sponsor 3</div>
+    <div class="sponsor-item">🏢 Sponsor 4</div>
+  </div>
+  <p style="text-align:center; margin-top:10px; opacity:0.7;">Interested in sponsoring? <a href="#" style="color:var(--teal);">Contact us</a></p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>© 2026 CERTA CITO ANNUAL SPORTS GAMES</div>
+  <div class="footer-links">
+    <a href="#">Privacy</a> | <a href="#">Contact</a>
+  </div>
+</footer>
+
+</main>
+
+<!-- COUNTDOWN SCRIPT (enhanced) -->
+<script>
+  (function() {
+    const target = new Date("June 1, 2026 09:00:00").getTime();
+    const countdownEl = document.getElementById('countdown');
+    
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const diff = target - now;
+      
+      if (diff < 0) {
+        countdownEl.innerHTML = '<h3 style="margin:0;">🎯 Event Started!</h3>';
+        return;
+      }
+      
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      
+      // Format with leading zeros
+      const format = (n) => n.toString().padStart(2, '0');
+      
+      countdownEl.innerHTML = `
+        <div class="count"><b>${days}</b>Days</div>
+        <div class="count"><b>${format(hours)}</b>Hours</div>
+        <div class="count"><b>${format(minutes)}</b>Minutes</div>
+        <div class="count"><b>${format(seconds)}</b>Seconds</div>
+      `;
+    }
+    
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  })();
+</script>
+
+<!-- SMOOTH SCROLL FOR ANCHOR LINKS (optional) -->
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+
 </body>
 </html>
