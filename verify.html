@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ticket Verification • Certa Cito 2026</title>
+  <title>Ticket Verification • Certa Cito Annual Sports Games 2026</title>
   <meta name="description" content="Verify raffle tickets for Certa Cito Annual Sports Games 2026." />
 
   <style>
@@ -13,13 +13,16 @@
       --green:#012906;
 
       --text:#ffffff;
-      --muted: rgba(255,255,255,.72);
-      --stroke: rgba(255,255,255,.14);
-      --shadow: 0 18px 50px rgba(0,0,0,.35);
+      --muted:rgba(255,255,255,.78);
+      --stroke:rgba(255,255,255,.14);
 
-      --radius: 18px;
-      --radius2: 22px;
-      --max: 980px;
+      --card:rgba(255,255,255,.06);
+      --card2:rgba(255,255,255,.09);
+      --shadow:0 18px 50px rgba(0,0,0,.35);
+
+      --radius:18px;
+      --radius2:22px;
+      --max:980px;
 
       --ok:#2ecc71;
       --bad:#ff4d4d;
@@ -27,351 +30,586 @@
     }
 
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
       color:var(--text);
       background:
-        radial-gradient(1200px 900px at 22% 12%, rgba(2,157,171,.22), transparent 60%),
-        radial-gradient(900px 700px at 84% 18%, rgba(1,41,6,.22), transparent 60%),
-        radial-gradient(1000px 800px at 50% 92%, rgba(2,157,171,.14), transparent 55%),
-        linear-gradient(160deg, var(--navy) 0%, var(--navy) 45%, var(--green) 100%);
-      min-height:100vh;
+        radial-gradient(1200px 700px at 20% 15%, rgba(2,157,171,.25), transparent 55%),
+        radial-gradient(900px 600px at 80% 25%, rgba(1,41,6,.28), transparent 60%),
+        linear-gradient(140deg, var(--navy) 0%, #02114a 35%, #021b36 55%, #01151f 100%);
       overflow-x:hidden;
     }
 
+    /* Watermark */
     body::before{
       content:"";
       position:fixed;
       inset:0;
-      background: url("logo.png") center 120px / 420px no-repeat;
+      background-image:url("logo.png");
+      background-repeat:no-repeat;
+      background-position:center;
+      background-size:min(520px, 70vw);
       opacity:.07;
       pointer-events:none;
-      filter: saturate(1.2) contrast(1.05);
+      filter:grayscale(10%);
+      transform:translateZ(0);
     }
 
-    a{color:inherit;text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:24px 18px 60px}
-
+    /* Top bar */
     .topbar{
-      display:flex; align-items:center; justify-content:space-between; gap:14px;
-      padding:14px 16px;
-      border:1px solid var(--stroke);
-      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.05));
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      position:sticky;
+      top:0;
+      z-index:50;
       backdrop-filter: blur(10px);
+      background: rgba(1,1,36,.55);
+      border-bottom:1px solid rgba(255,255,255,.10);
     }
-
-    .brand{display:flex; align-items:center; gap:12px; min-width:0}
+    .topbar-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+    }
     .brand img{
-      width:44px; height:44px; object-fit:contain;
-      border-radius:12px;
-      padding:6px;
-      background: rgba(255,255,255,.08);
-      border:1px solid var(--stroke);
+      width:34px;height:34px;
+      object-fit:contain;
+      filter: drop-shadow(0 8px 18px rgba(0,0,0,.35));
     }
-    .brand .t{display:flex; flex-direction:column; line-height:1.15; min-width:0}
-    .brand .t strong{
-      font-size:14px; letter-spacing:.08em; text-transform:uppercase;
-      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    .brand .titles{
+      display:flex;
+      flex-direction:column;
+      line-height:1.1;
+      min-width:0;
     }
-    .brand .t span{font-size:12px; color:var(--muted)}
-
-    .chip{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:10px 12px;
-      border-radius: 999px;
-      border:1px solid var(--stroke);
+    .brand .titles b{
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:12px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .brand .titles span{
+      font-size:12px;
+      color:var(--muted);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .top-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .btn{
+      appearance:none;
+      border:1px solid rgba(255,255,255,.16);
       background: rgba(255,255,255,.06);
-      transition: transform .15s ease, background .15s ease, border-color .15s ease;
-      font-size:13px;
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:12px;
+      cursor:pointer;
+      text-decoration:none;
+      font-weight:600;
+      letter-spacing:.02em;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      user-select:none;
+      white-space:nowrap;
     }
-    .chip:hover{
-      transform: translateY(-1px);
-      background: rgba(255,255,255,.10);
-      border-color: rgba(2,157,171,.65);
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.24);}
+    .btn:active{ transform: translateY(0px); }
+    .btn.primary{
+      border-color: rgba(2,157,171,.45);
+      background: linear-gradient(135deg, rgba(2,157,171,.35), rgba(1,41,6,.25));
+    }
+    .btn.primary:hover{
+      border-color: rgba(2,157,171,.70);
+      background: linear-gradient(135deg, rgba(2,157,171,.48), rgba(1,41,6,.35));
+    }
+
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:28px 16px 56px;
+    }
+
+    .hero{
+      margin-top:10px;
+      display:grid;
+      gap:18px;
+    }
+    .hero h1{
+      margin:10px 0 6px;
+      font-size: clamp(28px, 4vw, 44px);
+      letter-spacing:.04em;
+      text-transform:uppercase;
+    }
+    .hero p{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+      max-width:68ch;
+    }
+
+    .grid{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: 1.2fr .9fr;
+      gap:16px;
+      align-items:stretch;
+    }
+    @media (max-width: 860px){
+      .grid{ grid-template-columns: 1fr; }
     }
 
     .card{
-      margin-top:18px;
-      border-radius: var(--radius2);
-      border:1px solid var(--stroke);
-      background:
-        radial-gradient(900px 380px at 20% 10%, rgba(2,157,171,.22), transparent 65%),
-        radial-gradient(900px 380px at 80% 20%, rgba(1,41,6,.22), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
-      box-shadow: var(--shadow);
-      padding:20px;
-      backdrop-filter: blur(10px);
-    }
-
-    h1{
-      margin:0 0 8px;
-      font-size: clamp(20px, 2.7vw, 32px);
-      text-transform:uppercase;
-      letter-spacing:.02em;
-    }
-    .sub{margin:0; color:rgba(255,255,255,.74); font-size:14px; line-height:1.55}
-
-    .row{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap:14px;
-      margin-top:14px;
-      align-items:stretch;
-    }
-    .panel{
-      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
       border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05);
-      padding:14px;
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
     }
-
-    label{
-      display:block;
+    .card .inner{
+      padding:18px;
+    }
+    .card-title{
       font-size:12px;
-      letter-spacing:.06em;
+      letter-spacing:.14em;
       text-transform:uppercase;
-      color:rgba(255,255,255,.78);
-      margin-bottom:8px
+      color:rgba(255,255,255,.80);
+      margin:0 0 10px;
     }
 
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    label{
+      font-size:12px;
+      color:rgba(255,255,255,.80);
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
     input{
       width:100%;
-      padding:12px 12px;
-      border-radius: 14px;
+      padding:14px 14px;
+      border-radius:14px;
       border:1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.22);
-      color: var(--text);
+      background: rgba(0,0,0,.20);
+      color:var(--text);
       outline:none;
-      font-size: 15px;
+      font-size:16px;
+      transition:border-color .12s ease, box-shadow .12s ease;
     }
     input:focus{
-      border-color: rgba(2,157,171,.75);
-      box-shadow: 0 0 0 4px rgba(2,157,171,.18)
+      border-color: rgba(2,157,171,.65);
+      box-shadow: 0 0 0 4px rgba(2,157,171,.18);
     }
 
-    .btnRow{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px}
-
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding: 12px 14px;
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.16);
-      background: rgba(255,255,255,.07);
-      box-shadow: 0 10px 24px rgba(0,0,0,.22);
-      transition: transform .14s ease, background .14s ease, border-color .14s ease;
-      font-weight: 900;
-      font-size: 14px;
-      cursor:pointer;
-      user-select:none;
+    .row{
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
     }
-    .btn:hover{
-      transform: translateY(-1px);
-      background: rgba(255,255,255,.11);
-      border-color: rgba(2,157,171,.7)
+    .help{
+      margin-top:12px;
+      color:rgba(255,255,255,.70);
+      font-size:13px;
     }
-    .btnPrimary{
-      background: linear-gradient(135deg, rgba(2,157,171,.92), rgba(1,41,6,.88));
-      border-color: rgba(2,157,171,.70);
+    .mono{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      color:rgba(255,255,255,.85);
     }
-    .btnGhost{background: rgba(1,1,36,.35)}
 
     .status{
-      display:flex; flex-direction:column; gap:10px;
-      padding: 14px;
-      border-radius: 18px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.16);
-    }
-
-    .badge{
-      display:inline-flex;
+      display:flex;
       align-items:center;
       gap:10px;
-      padding:10px 12px;
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      font-weight: 900;
-      letter-spacing:.02em;
-      text-transform: uppercase;
-      width: fit-content;
+      margin-bottom:10px;
     }
-    .dot{width:10px; height:10px; border-radius:999px; background: var(--warn)}
+    .dot{
+      width:10px;height:10px;border-radius:50%;
+      background: rgba(255,255,255,.35);
+      box-shadow: 0 0 0 4px rgba(255,255,255,.08);
+    }
+    .dot.ok{ background: var(--ok); box-shadow:0 0 0 4px rgba(46,204,113,.18);}
+    .dot.bad{ background: var(--bad); box-shadow:0 0 0 4px rgba(255,77,77,.18);}
+    .dot.warn{ background: var(--warn); box-shadow:0 0 0 4px rgba(241,196,15,.16);}
+
+    .status b{
+      font-size:14px;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+    }
 
     .kv{
       display:grid;
-      grid-template-columns: 140px 1fr;
-      gap:8px;
-      font-size:13px;
-      color:rgba(255,255,255,.80)
+      grid-template-columns: 110px 1fr;
+      gap:10px 12px;
+      padding-top:6px;
+      border-top:1px solid rgba(255,255,255,.10);
+      margin-top:10px;
+      font-size:14px;
     }
-    .kv b{color:rgba(255,255,255,.92)}
+    .kv div:nth-child(odd){
+      color:rgba(255,255,255,.72);
+      font-weight:600;
+    }
 
     .footer{
-      margin-top:18px;
+      margin-top:26px;
+      color:rgba(255,255,255,.55);
+      font-size:12px;
       text-align:center;
-      color: rgba(255,255,255,.68);
-      font-size: 13px;
     }
 
-    @media (max-width: 920px){
-      .row{grid-template-columns:1fr}
-      body::before{background-size: 320px; background-position: center 140px;}
-      .kv{grid-template-columns: 110px 1fr}
+    /* QR scanner modal */
+    .modal{
+      position:fixed;
+      inset:0;
+      background: rgba(0,0,0,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      z-index:80;
+    }
+    .modal.open{ display:flex; }
+    .modal-panel{
+      width:min(820px, 100%);
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(1,1,36,.75);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .modal-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:14px 16px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+    }
+    .modal-head b{
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+    .modal-body{ padding:16px; }
+    #qrVideo{
+      width:100%;
+      border-radius:18px;
+      background:#000;
+      border:1px solid rgba(255,255,255,.12);
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+    .modal-hint{
+      margin-top:10px;
+      color:rgba(255,255,255,.75);
+      font-size:13px;
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="topbar">
+  <header class="topbar">
+    <div class="topbar-inner">
       <div class="brand">
         <img src="logo.png" alt="Certa Cito logo">
-        <div class="t">
-          <strong>CERTA CITO ANNUAL SPORTS GAMES 2026</strong>
+        <div class="titles">
+          <b>CERTA CITO ANNUAL SPORTS GAMES 2026</b>
           <span>Ticket verification portal</span>
         </div>
       </div>
-      <a class="chip" href="index.html">← Back to Home</a>
+      <div class="top-actions">
+        <a class="btn" href="./index.html">← Back to Home</a>
+        <button class="btn primary" id="scanBtn" type="button">📷 Scan QR Code</button>
+      </div>
     </div>
+  </header>
 
-    <div class="card">
+  <main class="wrap">
+    <section class="hero">
       <h1>Ticket Verification</h1>
-      <p class="sub">Scan a QR code or enter the ticket number to confirm validity.</p>
+      <p>Scan a QR code or enter the ticket number to confirm validity. This page checks your <span class="mono">tickets.json</span> database.</p>
+    </section>
 
-      <div class="row">
-        <div class="panel">
-          <label for="ticketInput">Ticket Number</label>
-          <input id="ticketInput" inputmode="numeric" placeholder="e.g. 260000" />
+    <section class="grid">
+      <!-- Left: input -->
+      <div class="card">
+        <div class="inner">
+          <div class="card-title">Ticket number</div>
 
-          <div class="btnRow">
-            <button class="btn btnPrimary" id="verifyBtn">Verify Ticket</button>
-            <button class="btn btnGhost" id="clearBtn">Clear</button>
+          <div class="field">
+            <label for="ticketInput">Ticket Number</label>
+            <input id="ticketInput" inputmode="numeric" placeholder="e.g. 260001" autocomplete="off" />
           </div>
 
-          <p class="sub" style="margin-top:12px;">
-            QR link format:
-            <b>verify.html?t=260000</b>
-          </p>
-        </div>
-
-        <div class="status">
-          <div class="badge" id="statusBadge">
-            <span class="dot" id="statusDot"></span>
-            <span id="statusTitle">READY</span>
+          <div class="row">
+            <button class="btn primary" id="verifyBtn" type="button">Verify Ticket</button>
+            <button class="btn" id="clearBtn" type="button">Clear</button>
           </div>
 
-          <div class="kv">
-            <b>Ticket:</b><span id="outTicket">—</span>
-            <b>Status:</b><span id="outStatus">—</span>
-            <b>Event:</b><span>Certa Cito Annual Sports Games 2026</span>
-            <b>Message:</b><span id="outMsg">Enter a ticket number, then press Verify.</span>
+          <div class="help">
+            QR link format: <span class="mono">verify.html?t=260000</span><br />
+            Tip: after scanning, verification runs automatically.
           </div>
         </div>
       </div>
 
-      <div class="footer">
-        © 2026 CERTA CITO • Verification Portal
+      <!-- Right: result -->
+      <div class="card">
+        <div class="inner">
+          <div class="status">
+            <span class="dot" id="statusDot"></span>
+            <b id="statusTitle">Awaiting input</b>
+          </div>
+
+          <div class="kv" id="kv">
+            <div>Ticket:</div><div id="rTicket" class="mono">—</div>
+            <div>Status:</div><div id="rStatus">—</div>
+            <div>Event:</div><div id="rEvent">Certa Cito Annual Sports Games 2026</div>
+            <div>Message:</div><div id="rMsg">Enter a ticket number or scan a QR code.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">© 2026 CERTA CITO • Verification Portal</div>
+  </main>
+
+  <!-- QR Scanner Modal -->
+  <div class="modal" id="qrModal" aria-hidden="true">
+    <div class="modal-panel">
+      <div class="modal-head">
+        <b>Scan QR Code</b>
+        <button class="btn" id="closeScan" type="button">Close</button>
+      </div>
+      <div class="modal-body">
+        <video id="qrVideo" playsinline></video>
+        <div class="modal-hint">
+          Point the camera at the QR code. When detected, we will open the link or extract the ticket number automatically.
+        </div>
       </div>
     </div>
   </div>
 
+  <!-- Lightweight QR scanner (no build tools needed) -->
+  <script src="https://unpkg.com/qr-scanner@1.4.2/qr-scanner.umd.min.js"></script>
   <script>
-    const params = new URLSearchParams(location.search);
-    const ticketInput = document.getElementById("ticketInput");
-    const verifyBtn = document.getElementById("verifyBtn");
-    const clearBtn = document.getElementById("clearBtn");
+    const TICKETS_URL = "./tickets.json";
+    const EVENT_NAME = "Certa Cito Annual Sports Games 2026";
 
-    const statusDot = document.getElementById("statusDot");
-    const statusTitle = document.getElementById("statusTitle");
-    const outTicket = document.getElementById("outTicket");
-    const outStatus = document.getElementById("outStatus");
-    const outMsg = document.getElementById("outMsg");
+    const el = (id) => document.getElementById(id);
 
-    function setState(state, ticket, message){
-      outTicket.textContent = ticket || "—";
-      outStatus.textContent = state;
-      outMsg.textContent = message;
+    const ticketInput = el("ticketInput");
+    const verifyBtn = el("verifyBtn");
+    const clearBtn  = el("clearBtn");
 
-      if(state === "VALID"){
-        statusTitle.textContent = "VALID";
-        statusDot.style.background = "var(--ok)";
-      } else if(state === "INVALID"){
-        statusTitle.textContent = "INVALID";
-        statusDot.style.background = "var(--bad)";
-      } else if(state === "ERROR"){
-        statusTitle.textContent = "ERROR";
-        statusDot.style.background = "var(--bad)";
-      } else {
-        statusTitle.textContent = "READY";
-        statusDot.style.background = "var(--warn)";
-      }
+    const statusDot   = el("statusDot");
+    const statusTitle = el("statusTitle");
+    const rTicket = el("rTicket");
+    const rStatus = el("rStatus");
+    const rEvent  = el("rEvent");
+    const rMsg    = el("rMsg");
+
+    const qrModal = el("qrModal");
+    const scanBtn = el("scanBtn");
+    const closeScan = el("closeScan");
+    const qrVideo = el("qrVideo");
+
+    let ticketsSet = null; // Set of valid ticket numbers (strings)
+    let qrScanner = null;
+
+    function setStatus(type, title, ticket, status, msg){
+      statusDot.className = "dot" + (type ? (" " + type) : "");
+      statusTitle.textContent = title;
+      rTicket.textContent = ticket ?? "—";
+      rStatus.textContent = status ?? "—";
+      rEvent.textContent = EVENT_NAME;
+      rMsg.textContent = msg ?? "";
     }
 
-    async function isTicketValid(ticket){
-      // tickets.json MUST be in the same folder as verify.html
-      const res = await fetch("./tickets.json", { cache: "no-store" });
-      if(!res.ok) throw new Error("tickets.json not reachable");
+    async function loadTicketsOnce(){
+      if (ticketsSet) return ticketsSet;
+      setStatus("warn", "Loading database…", "—", "—", "Fetching tickets.json");
+      const res = await fetch(TICKETS_URL, { cache: "no-store" });
+      if(!res.ok) throw new Error("Failed to load tickets.json (" + res.status + ")");
       const data = await res.json();
 
-      // Accepts either:
-      // 1) {"tickets":["260000","260001"...]}
-      // 2) {"tickets":{"260000":"key","260001":"key"...}}
-      if(Array.isArray(data.tickets)) {
-        return data.tickets.includes(ticket);
+      // Supports either:
+      // 1) ["260000","260001",...]
+      // 2) [{ "TicketNumber": "260000", ... }, ...]
+      // 3) { "tickets": [...] }
+      let arr = data;
+      if (data && typeof data === "object" && Array.isArray(data.tickets)) arr = data.tickets;
+
+      const set = new Set();
+      if (Array.isArray(arr)) {
+        for (const item of arr){
+          if (typeof item === "string" || typeof item === "number") {
+            set.add(String(item).trim());
+          } else if (item && typeof item === "object") {
+            const t = item.TicketNumber ?? item.ticket ?? item.ticketNumber ?? item.number;
+            if (t !== undefined && t !== null) set.add(String(t).trim());
+          }
+        }
       }
-      if(data.tickets && typeof data.tickets === "object") {
-        return Object.prototype.hasOwnProperty.call(data.tickets, ticket);
-      }
-      return false;
+      ticketsSet = set;
+      return set;
     }
 
-    async function verify(){
-      const t = (ticketInput.value || "").trim();
+    async function verifyTicket(ticket){
+      const t = String(ticket || "").trim();
       if(!t){
-        setState("READY", "", "Please enter a ticket number.");
+        setStatus("", "Awaiting input", "—", "—", "Enter a ticket number or scan a QR code.");
         return;
       }
-
-      if(!/^\d{6,}$/.test(t)){
-        setState("INVALID", t, "Invalid format. Please enter digits only (e.g. 260000).");
-        return;
-      }
-
-      setState("READY", t, "Checking ticket list…");
 
       try{
-        const ok = await isTicketValid(t);
+        const set = await loadTicketsOnce();
+        const ok = set.has(t);
+
         if(ok){
-          setState("VALID", t, "Ticket found and confirmed valid.");
-        } else {
-          setState("INVALID", t, "Ticket not found in the official list.");
+          setStatus("ok", "VALID", t, "VALID", "Ticket found and confirmed valid.");
+        }else{
+          setStatus("bad", "NOT FOUND", t, "INVALID", "Ticket number not found in database.");
         }
-      }catch(e){
-        setState("ERROR", t, "Could not load tickets.json. Upload tickets.json to the repo root and try again.");
+      }catch(err){
+        setStatus("bad", "ERROR", t, "ERROR", "Could not load tickets database. Check tickets.json is uploaded and publicly accessible.");
+        console.error(err);
       }
     }
 
-    clearBtn.addEventListener("click", ()=>{
+    function getTicketFromURL(){
+      const params = new URLSearchParams(location.search);
+      return params.get("t") || params.get("ticket") || "";
+    }
+
+    // UI events
+    verifyBtn.addEventListener("click", () => verifyTicket(ticketInput.value));
+    clearBtn.addEventListener("click", () => {
       ticketInput.value = "";
-      history.replaceState({}, "", "verify.html");
-      setState("READY", "", "Enter a ticket number, then press Verify.");
+      history.replaceState({}, "", location.pathname); // remove ?t=...
+      setStatus("", "Awaiting input", "—", "—", "Enter a ticket number or scan a QR code.");
       ticketInput.focus();
     });
 
-    verifyBtn.addEventListener("click", verify);
-    ticketInput.addEventListener("keydown", (e)=>{ if(e.key === "Enter") verify(); });
+    ticketInput.addEventListener("keydown", (e) => {
+      if(e.key === "Enter") verifyTicket(ticketInput.value);
+    });
 
-    const urlTicket = (params.get("t") || "").trim();
-    if(urlTicket){
-      ticketInput.value = urlTicket;
-      verify();
-    } else {
-      setState("READY", "", "Enter a ticket number, then press Verify.");
+    // QR scanner
+    function openModal(){
+      qrModal.classList.add("open");
+      qrModal.setAttribute("aria-hidden","false");
     }
+    function closeModal(){
+      qrModal.classList.remove("open");
+      qrModal.setAttribute("aria-hidden","true");
+    }
+
+    async function startScanner(){
+      openModal();
+
+      if(!window.QrScanner){
+        setStatus("bad","ERROR","—","ERROR","QR scanner library failed to load (internet needed).");
+        return;
+      }
+
+      if(!qrScanner){
+        const QrScanner = window.QrScanner;
+        qrScanner = new QrScanner(qrVideo, (result) => {
+          const text = (result && result.data) ? result.data : String(result || "");
+          handleScanResult(text);
+        }, {
+          highlightScanRegion: true,
+          highlightCodeOutline: true,
+          maxScansPerSecond: 5
+        });
+      }
+
+      try{
+        await qrScanner.start();
+      }catch(e){
+        setStatus("bad","CAMERA BLOCKED","—","ERROR","Camera permission denied or unavailable. Allow camera access then try again.");
+        console.error(e);
+      }
+    }
+
+    function stopScanner(){
+      if(qrScanner) qrScanner.stop();
+      closeModal();
+    }
+
+    function handleScanResult(text){
+      // If QR contains a full URL like https://.../verify.html?t=260001
+      // or just verify.html?t=260001
+      // or only the number 260001
+      const raw = String(text || "").trim();
+
+      // Try parse URL param t=
+      let ticket = "";
+      try{
+        if(raw.includes("t=") || raw.includes("ticket=")){
+          const u = new URL(raw, location.origin);
+          ticket = u.searchParams.get("t") || u.searchParams.get("ticket") || "";
+        }
+      }catch(_){ /* not a full URL */ }
+
+      if(!ticket && /^\d{3,}$/.test(raw)) ticket = raw;
+
+      if(ticket){
+        stopScanner();
+        ticketInput.value = ticket;
+        history.replaceState({}, "", location.pathname + "?t=" + encodeURIComponent(ticket));
+        verifyTicket(ticket);
+      }else{
+        // If it's a URL but not parseable, open it
+        if(raw.startsWith("http://") || raw.startsWith("https://")){
+          window.location.href = raw;
+        } else {
+          setStatus("warn","SCAN READ","—","—","QR detected but ticket number not recognized. Ensure QR contains verify.html?t=XXXXXX or only the ticket number.");
+        }
+      }
+    }
+
+    scanBtn.addEventListener("click", startScanner);
+    closeScan.addEventListener("click", stopScanner);
+    qrModal.addEventListener("click", (e) => {
+      if(e.target === qrModal) stopScanner();
+    });
+
+    // On load: auto-verify if ?t=...
+    (async function init(){
+      setStatus("", "Awaiting input", "—", "—", "Enter a ticket number or scan a QR code.");
+      const t = getTicketFromURL();
+      if(t){
+        ticketInput.value = t;
+        await verifyTicket(t);
+      }
+    })();
   </script>
 </body>
 </html>
